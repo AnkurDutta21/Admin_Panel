@@ -1,11 +1,5 @@
 import { IconType } from "react-icons";
 
-export interface IAuth {
-  email: string;
-  password: string;
-  rememberMe: boolean;
-}
-
 export interface IQuotes {
   quote: string;
   author: string;
@@ -47,8 +41,8 @@ export interface IEvent {
   title: string;
   start: Date;
   end: Date;
-  type: 'event' | 'leave';
-  status?: 'pending' | 'approved' | 'rejected';
+  type: "event" | "leave";
+  status?: "pending" | "approved" | "rejected";
 }
 
 export interface ProductFormValues {
@@ -108,17 +102,17 @@ export interface JobDataResponse {
 }
 export interface JobApplicationResponse {
   success: boolean;
-  data:{
-    jobs:JobApplication[],
-    currentPage:number,
-    totalPages:number,
-    totalJobs:number
-  }
+  data: {
+    jobs: JobApplication[];
+    currentPage: number;
+    totalPages: number;
+    totalJobs: number;
+  };
 }
 export interface singleJobDataResponse {
   success: boolean;
-  data:  JobData;
-} 
+  data: JobData;
+}
 
 export interface Pagination {
   currentPage: number;
@@ -141,8 +135,6 @@ export interface DashboardDataResponse {
   };
 }
 
-
-
 export interface WorkshopEnquiry {
   _id: string;
   name: string;
@@ -151,7 +143,7 @@ export interface WorkshopEnquiry {
   guardianContact: string;
   guardianEmail?: string;
   city: string;
-  mobileUsageLevel?: 'LOW' | 'MEDIUM' | 'HIGH';
+  mobileUsageLevel?: "LOW" | "MEDIUM" | "HIGH";
   mobileUsageHours?: number;
   primaryActivityOnMobile?: string;
   isTimeRestricted?: boolean;
@@ -173,4 +165,26 @@ export interface WorkshopEnquiriesResponse {
   success: boolean;
   message: string;
   data: WorkshopEnquiry[];
+}
+
+export interface RegisterUser {
+  name: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+  rememberMe: boolean;
+}
+
+export interface RegisterUserApiResponse {
+  success: boolean;
+  message: string;
+  data: {
+    _id: string;
+    name: string;
+    email: string;
+    phoneNumber: string;
+    picture: string;
+    role: string;
+    __v: number;
+  };
 }
