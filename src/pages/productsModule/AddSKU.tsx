@@ -150,9 +150,7 @@ const AddSku = () => {
         }
         return uploadedUrls;
       };
-
-      //upload video files here
-
+       // upload video files here
       const uploadVideoFiles = async (files: File[]) => {
         console.log("Uploading video files", files);
         console.log("token", token);
