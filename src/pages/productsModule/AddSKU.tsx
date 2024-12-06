@@ -118,6 +118,7 @@ const AddSku = () => {
   const handleSubmit = async (values: FormValues) => {
     const token = await getToken();
     try {
+      //upload image files here
       const uploadImageFiles = async (files: File[]) => {
         console.log("Uploading image files", files);
         console.log("token", token);
