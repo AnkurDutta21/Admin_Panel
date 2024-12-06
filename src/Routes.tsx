@@ -123,7 +123,7 @@ const routes = [
     exact: true,
   },
   {
-    path: "/cardproduct",
+    path: "/add-sku",
     component: (
       <MainLayout>
         <ProtectedRoutes>

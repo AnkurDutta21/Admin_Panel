@@ -75,8 +75,8 @@ const initialValues = {
 
 const ageOptions = [
   { value: "6-12", label: "6-12 years" },
-  { value: "13-17", label: "13-17 years" },
-  { value: "18-19", label: "18-19 years" },
+  { value: "13-16", label: "13-16 years" },
+  { value: "17-19", label: "17-19 years" },
   { value: "20+", label: "20+ years" },
 ];
 interface ProductImage {
@@ -130,7 +130,7 @@ const AddSku = () => {
           formData.append("file", file);
           console.log("formdata", formData);
           const response = await fetch(
-            "https://api.mentoons.com/api/v1/upload/file",
+            "http://localhost:4000/api/v1/upload/file",
 
             {
               method: "POST",
@@ -150,7 +150,7 @@ const AddSku = () => {
         }
         return uploadedUrls;
       };
-       // upload video files here
+      // upload video files here
       const uploadVideoFiles = async (files: File[]) => {
         console.log("Uploading video files", files);
         console.log("token", token);
@@ -159,7 +159,7 @@ const AddSku = () => {
           const formData = new FormData();
           formData.append("file", file);
           const response = await fetch(
-            "https://api.mentoons.com/api/v1/upload/file",
+            "http://localhost:4000/api/v1/upload/file",
             {
               method: "POST",
               headers: {
@@ -198,7 +198,7 @@ const AddSku = () => {
 
       console.log("Form Values:", values);
 
-      const response = await fetch("https://api.mentoons.com/api/v1/sku", {
+      const response = await fetch("http://localhost:4000/api/v1/sku", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
