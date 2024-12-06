@@ -4,7 +4,7 @@ import UserDashboardCards from "./UserDashboardCards";
 const UserDashboard = () => {
     const [timer, setTimer] = useState<number>(0);
     const [isRunning, setIsRunning] = useState<boolean>(false);
-    const [intervalId, setIntervalId] = useState<number | null>(null);
+    const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
 
     useEffect(() => {
         if (!isRunning && timer > 0) {
