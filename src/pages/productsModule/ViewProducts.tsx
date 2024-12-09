@@ -13,7 +13,7 @@ const ViewProduct: React.FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:4000/api/v1/products/${productId}`);
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/products/${productId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch product');
         }
