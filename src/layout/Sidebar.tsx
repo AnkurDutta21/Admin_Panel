@@ -53,7 +53,7 @@ const Sidebar = () => {
           items={[
             { href: "/product-table", label: "All Products" },
             { href: "/add-products", label: "Add Product" },
-            { href: "/cardproduct", label: "Add SKU" },
+            { href: "/add-sku", label: "Add SKU" },
             { href: "/all-sku", label: "All SKU" },
           ]}
         />
