@@ -1,7 +1,7 @@
 import { ErrorMessage, FormikHelpers } from 'formik';
 import { AuthorData } from '../../types';
 import {useState } from 'react';
-import AddAuthorForm from './addAuthorForm';
+import AddAuthorForm from './AddAuthorForm';
 
 interface AuthorCompProps {
   authors: AuthorData[];

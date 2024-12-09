@@ -8,7 +8,7 @@ interface AddAuthorFormProps {
   setAuthors:(author:AuthorData[])=>void;
 }
 
-const AddAuthorForm = ({ setModalOpen,setAuthors }: AddAuthorFormProps) => {
+const AddAuthorForm = ({ setModalOpen }: AddAuthorFormProps) => {
   const { getToken } = useAuth();
 
   const [name, setName] = useState('');
@@ -69,11 +69,12 @@ const AddAuthorForm = ({ setModalOpen,setAuthors }: AddAuthorFormProps) => {
   
       if (authorResponse.ok) {
         const newAuthor: { data: AuthorData } = await authorResponse.json();
+        console.log(newAuthor,'llll')
   
         successToast('Author added successfully');
-        setAuthors((prevAuthors:AuthorData): AuthorData => {
-          return [...prevAuthors, newAuthor.data]; // Explicitly returning AuthorData[]
-        });
+        // setAuthors((prevAuthors:AuthorData[]): AuthorData => {
+        //   return [...prevAuthors, newAuthor.data]; // Explicitly returning AuthorData[]
+        // });
         setModalOpen(false);
       } else {
         throw new Error('Failed to add author');

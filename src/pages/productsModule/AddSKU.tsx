@@ -130,7 +130,7 @@ const AddSku = () => {
           formData.append("file", file);
           console.log("formdata", formData);
           const response = await fetch(
-            "http://localhost:4000/api/v1/upload/file",
+            "https://api.mentoons.com/api/v1/upload/file",
 
             {
               method: "POST",
@@ -159,7 +159,7 @@ const AddSku = () => {
           const formData = new FormData();
           formData.append("file", file);
           const response = await fetch(
-            "http://localhost:4000/api/v1/upload/file",
+            "https://api.mentoons.com/api/v1/upload/file",
             {
               method: "POST",
               headers: {
@@ -198,7 +198,7 @@ const AddSku = () => {
 
       console.log("Form Values:", values);
 
-      const response = await fetch("http://localhost:4000/api/v1/sku", {
+      const response = await fetch("https://api.mentoons.com/api/v1/sku", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
