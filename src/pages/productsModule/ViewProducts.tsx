@@ -113,7 +113,12 @@ const ViewProduct: React.FC = () => {
             </div>
             <h1 className="mt-1 text-3xl font-bold text-gray-900">Product Title: {product?.productTitle}</h1>
             <p className="mt-2 text-gray-600">Product Description: {product?.productDescription}</p>
-            <p className="mt-2 text-gray-600">Author: {product?.author && product.author.length > 0 ? product.author[0]?.name : 'Unknown'}</p>      
+            <div className="mt-2 flex items-center px-4 py-2 hover:bg-gray-200 cursor-pointer">Author:  {product?.author && product.author.length > 0 ?<> <img
+                  src={ product.author[0]?.image}
+                  alt={ product.author[0]?.name}
+                  className="w-6 h-6 rounded-full object-cover mr-2"
+                />
+                <span>{ product.author[0]?.name}</span></> : 'Unknown'}</div>      
             <div className="mt-4">
               <h2 className="text-xl font-semibold mb-2">Product Sample</h2>
               {product?.productSample && renderFilePreview(product.productSample, 'sample')}
