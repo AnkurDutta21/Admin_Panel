@@ -13,7 +13,7 @@ const ViewProduct: React.FC = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://mentoons-backend-zlx3.onrender.com/api/v1/products/${productId}`);
+        const response = await fetch(`http://localhost:4000/api/v1/products/${productId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch product');
         }
@@ -113,9 +113,7 @@ const ViewProduct: React.FC = () => {
             </div>
             <h1 className="mt-1 text-3xl font-bold text-gray-900">Product Title: {product?.productTitle}</h1>
             <p className="mt-2 text-gray-600">Product Description: {product?.productDescription}</p>
-            <p className="mt-2 text-gray-600">Author: {product?.author}</p>
-            
-            
+            <p className="mt-2 text-gray-600">Author: {product?.author && product.author.length > 0 ? product.author[0]?.name : 'Unknown'}</p>      
             <div className="mt-4">
               <h2 className="text-xl font-semibold mb-2">Product Sample</h2>
               {product?.productSample && renderFilePreview(product.productSample, 'sample')}

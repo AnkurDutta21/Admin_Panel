@@ -6,9 +6,10 @@ import { AuthorData } from '../../types';
 interface AddAuthorFormProps {
   setModalOpen: any;
   setAuthors:(author:AuthorData[])=>void;
+  authors:AuthorData[]
 }
 
-const AddAuthorForm = ({ setModalOpen }: AddAuthorFormProps) => {
+const AddAuthorForm = ({ setModalOpen,setAuthors,authors }:AddAuthorFormProps) => {
   const { getToken } = useAuth();
 
   const [name, setName] = useState('');
@@ -39,7 +40,7 @@ const AddAuthorForm = ({ setModalOpen }: AddAuthorFormProps) => {
       }
   
       // Upload the image
-      const response = await fetch('https://api.mentoons.com/api/v1/upload/file', {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/upload/file`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
@@ -58,7 +59,7 @@ const AddAuthorForm = ({ setModalOpen }: AddAuthorFormProps) => {
         image: imageUrl,
       };
   
-      const authorResponse = await fetch('https://api.mentoons.com/api/v1/author', {
+      const authorResponse = await fetch(`${import.meta.env.VITE_BASE_URL}/author`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,9 +73,7 @@ const AddAuthorForm = ({ setModalOpen }: AddAuthorFormProps) => {
         console.log(newAuthor,'llll')
   
         successToast('Author added successfully');
-        // setAuthors((prevAuthors:AuthorData[]): AuthorData => {
-        //   return [...prevAuthors, newAuthor.data]; // Explicitly returning AuthorData[]
-        // });
+        setAuthors([...authors, newAuthor.data])
         setModalOpen(false);
       } else {
         throw new Error('Failed to add author');

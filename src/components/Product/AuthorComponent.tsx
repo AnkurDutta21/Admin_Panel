@@ -28,7 +28,7 @@ const AuthorDropdown = ({ authors, setFieldValue,setAuthors }: AuthorCompProps) 
 
   return (
     <>
-    {modalOpen && <AddAuthorForm  setModalOpen={setModalOpen} setAuthors={setAuthors}/>}
+    {modalOpen && <AddAuthorForm  setModalOpen={setModalOpen} setAuthors={setAuthors} authors={authors}/>}
     <div className="space-y-2">
       <label htmlFor="author" className="block text-sm font-medium text-gray-700">
         Author

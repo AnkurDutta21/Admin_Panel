@@ -72,7 +72,7 @@ export interface Product {
   productThumbnail: string;
   productSample: string;
   productFile: string;
-  author?:string
+  author?:AuthorData[]
 }
 
 export interface JobApplication {

@@ -39,7 +39,7 @@ const AddProducts = () => {
     const fetchAuthors = async () => {
         try {
             const token = await getToken();
-            const response = await fetch('https://api.mentoons.com/api/v1/author', {
+            const response = await fetch(`${import.meta.env.VITE_BASE_URL}/author`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
@@ -64,7 +64,7 @@ const AddProducts = () => {
         const formData = new FormData();
         formData.append('file', file);
 
-        const response = await fetch('https://api.mentoons.com/api/v1/upload/file', {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/upload/file`, {
             method: 'POST',
             headers: { Authorization: `Bearer ${(await getToken())}` },
             body: formData,
@@ -75,7 +75,8 @@ const AddProducts = () => {
         }
 
         const data = await response.json();
-        return data.data.imageUrl;
+        console.log(data,'popopo')
+        return data.data.fileDetails.url;
     };
 
     const handleSubmit = async (values: ProductFormValues, { setSubmitting }: any) => {
@@ -86,13 +87,13 @@ const AddProducts = () => {
                 productSample: values.productSample ? await uploadFile(values.productSample, 'sample') : null,
                 productFile: values.productFile ? await uploadFile(values.productFile, 'product file') : null,
             };
-
+           console.log(uploadedFiles,';lllll')
             const productData = {
                 ...values,
                 ...uploadedFiles,
             };
 
-            const url = 'https://api.mentoons.com/api/v1/products';
+            const url = `${import.meta.env.VITE_BASE_URL}/products`;
             const method = initialProduct ? 'PATCH' : 'POST';
             const productId = initialProduct?._id;
 
