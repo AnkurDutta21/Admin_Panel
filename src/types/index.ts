@@ -48,8 +48,8 @@ export interface IEvent {
   title: string;
   start: Date;
   end: Date;
-  type: 'event' | 'leave';
-  status?: 'pending' | 'approved' | 'rejected';
+  type: "event" | "leave";
+  status?: "pending" | "approved" | "rejected";
 }
 
 export interface ProductFormValues {
@@ -113,11 +113,11 @@ export interface JobDataResponse {
 export interface JobApplicationResponse {
   success: boolean;
   data: {
-    jobs: JobApplication[],
-    currentPage: number,
-    totalPages: number,
-    totalJobs: number
-  }
+    jobs: JobApplication[];
+    currentPage: number;
+    totalPages: number;
+    totalJobs: number;
+  };
 }
 export interface singleJobDataResponse {
   success: boolean;
@@ -144,8 +144,6 @@ export interface DashboardDataResponse {
     }[];
   };
 }
-
-
 
 export interface WorkshopEnquiry {
   _id: string;
@@ -193,7 +191,7 @@ export interface CallRequestsResponse {
     currentPage: number;
     totalPages: number;
     totalCallRequests: number;
-  }
+  };
 }
 export type CallRequest = {
   _id: string;
@@ -201,7 +199,7 @@ export type CallRequest = {
   phone: string;
   status: string;
   assignedTo?: User[];
-}
+};
 
 export interface AdminUser {
   _id: string;
@@ -224,7 +222,7 @@ export interface AssesmentReport {
     currentPage: number;
     totalPages: number;
     totalFeedbacks: number;
-  }
+  };
 }
 
 export interface AuthorData {
