@@ -113,6 +113,8 @@ const ViewProduct: React.FC = () => {
             </div>
             <h1 className="mt-1 text-3xl font-bold text-gray-900">Product Title: {product?.productTitle}</h1>
             <p className="mt-2 text-gray-600">Product Description: {product?.productDescription}</p>
+            <p className="mt-2 text-gray-600">Author: {product?.author}</p>
+            
             
             <div className="mt-4">
               <h2 className="text-xl font-semibold mb-2">Product Sample</h2>

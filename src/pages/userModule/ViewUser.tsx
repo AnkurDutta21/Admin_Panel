@@ -43,7 +43,7 @@ const ViewUser: React.FC = () => {
         try {
             const token = await getToken();
             await axios.post(
-                `https://mentoons-backend-zlx3.onrender.com/api/v1/user/update-role/${user?.clerkId}`,
+                `https://api.mentoons.com/api/v1/user/update-role/${user?.clerkId}`,
                 { 
                     role: newRole,
                 },

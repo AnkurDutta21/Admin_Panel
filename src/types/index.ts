@@ -72,6 +72,7 @@ export interface Product {
   productThumbnail: string;
   productSample: string;
   productFile: string;
+  author?:string
 }
 
 export interface JobApplication {
@@ -224,4 +225,10 @@ export interface AssesmentReport {
     totalPages: number;
     totalFeedbacks: number;
   }
+}
+
+export interface AuthorData {
+  _id:string;
+  name: string,
+  image: string,
 }

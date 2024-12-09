@@ -1,9 +1,11 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ProductFormValues } from '../../types';
+import { useState, useEffect } from 'react';
+import { AuthorData, ProductFormValues } from '../../types';
 import { errorToast, successToast } from '../../utils/toastResposnse';
-import { useState } from 'react';
+import { useAuth } from '@clerk/clerk-react';
+import AuthorDropdown from '../../components/Product/AuthorComponent';
 
 const initialValues = {
     productTitle: '',
@@ -26,18 +28,45 @@ const validationSchema = Yup.object({
 });
 
 const AddProducts = () => {
+    const { getToken } = useAuth();
     const location = useLocation();
     const initialProduct = location.state?.product;
-    console.log(initialProduct, "initialProduct")
     const navigate = useNavigate();
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [authors, setAuthors] = useState<AuthorData[]>([]);
+
+    // Fetch authors from the API
+    const fetchAuthors = async () => {
+        try {
+            const token = await getToken();
+            const response = await fetch('https://api.mentoons.com/api/v1/author', {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data.data, 'authors')
+                setAuthors(data.data || []);
+            } else {
+                throw new Error('Failed to fetch authors');
+            }
+        } catch (error) {
+            console.error('Error fetching authors:', error);
+            errorToast('Failed to fetch authors.');
+        }
+    };
+
+    useEffect(() => {
+        fetchAuthors();
+    }, []);
 
     const uploadFile = async (file: File, fieldName: string) => {
         const formData = new FormData();
         formData.append('file', file);
 
-        const response = await fetch('https://mentoons-backend-zlx3.onrender.com/api/v1/upload/file', {
+        const response = await fetch('https://api.mentoons.com/api/v1/upload/file', {
             method: 'POST',
+            headers: { Authorization: `Bearer ${(await getToken())}` },
             body: formData,
         });
 
@@ -63,24 +92,24 @@ const AddProducts = () => {
                 ...uploadedFiles,
             };
 
-            const url = 'https://mentoons-backend-zlx3.onrender.com/api/v1/products';
+            const url = 'https://api.mentoons.com/api/v1/products';
             const method = initialProduct ? 'PATCH' : 'POST';
             const productId = initialProduct?._id;
+
             const response = await fetch(initialProduct ? `${url}/${productId}` : url, {
                 method,
                 headers: {
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${(await getToken())}`
                 },
                 body: JSON.stringify(productData),
             });
+
             if (response.ok) {
-                const data = await response.json();
-                console.log(data);
                 successToast(initialProduct ? 'Product updated successfully' : 'Product added successfully');
                 navigate('/product-table');
-            }
-            else{
-                throw new Error;
+            } else {
+                throw new Error();
             }
         } catch (error: any) {
             console.error('Error saving product:', error);
@@ -92,15 +121,15 @@ const AddProducts = () => {
     };
 
     return (
-        <div className='bg-white px-8 rounded-lg shadow-lg max-w-4xl mx-auto items-center h-screen'>
-            <h1 className='text-2xl font-bold mb-6 text-gray-800'>{initialProduct ? 'Edit Product' : 'Add Product'}</h1>
+        <div className="bg-white px-8 rounded-lg shadow-lg max-w-4xl mx-auto items-center h-screen">
+            <h1 className="text-2xl font-bold mb-6 text-gray-800">{initialProduct ? 'Edit Product' : 'Add Product'}</h1>
             <Formik
                 initialValues={initialProduct || initialValues}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
                 {({ setFieldValue, isSubmitting: formikIsSubmitting }) => (
-                    <Form className='space-y-6'>
+                    <Form className="space-y-6">
                         <div className='space-y-2'>
                             <label htmlFor="productTitle" className='block text-sm font-medium text-gray-700'>Title</label>
                             <Field id="productTitle" name="productTitle" className='w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500' />
@@ -167,25 +196,18 @@ const AddProducts = () => {
                             />
                             <ErrorMessage name="productFile" component="div" className='text-red-500 text-sm' />
                         </div>
-                        <div className='space-y-2'>
-                            <label htmlFor="author" className='block text-sm font-medium text-gray-700'>Author</label>
-                            <Field 
-                                id="author"
-                                name="author"
-                                className='w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
-                            />
-                            <ErrorMessage name="author" component="div" className='text-red-500 text-sm' />
-                        </div>
+                        <AuthorDropdown
+                            authors={authors}
+                            setFieldValue={setFieldValue}
+                            setAuthors={setAuthors}
+                        />
+
                         <button
                             type="submit"
-                            className='w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-blue-300'
+                            className="w-full py-3 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-blue-300"
                             disabled={isSubmitting || formikIsSubmitting}
                         >
-                            {isSubmitting ? (
-                                <span>Loading...</span>
-                            ) : (
-                                initialProduct ? 'Update Product' : 'Add Product'
-                            )}
+                            {isSubmitting ? <span>Loading...</span> : initialProduct ? 'Update Product' : 'Add Product'}
                         </button>
                     </Form>
                 )}
@@ -195,3 +217,5 @@ const AddProducts = () => {
 };
 
 export default AddProducts;
+
+
