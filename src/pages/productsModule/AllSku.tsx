@@ -36,7 +36,7 @@ const AllSku = () => {
     if (productToDelete) {
       try {
         const response = await fetch(
-          `https://mentoons-backend-zlx3.onrender.com/api/v1/products/${productToDelete._id}`,
+          `${import.meta.env.VITE_BASE_URL}/products/${productToDelete._id}`,
           {
             method: "DELETE",
           }

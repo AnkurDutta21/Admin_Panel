@@ -39,7 +39,7 @@ const Users = () => {
     if (userToDelete) {
       try {
         const token = await getToken();
-        await axios.delete(`https://mentoons-backend-zlx3.onrender.com/api/v1/user/user/${userToDelete.clerkId}`, {
+        await axios.delete(`${import.meta.env.VITE_BASE_URL}/user/user/${userToDelete.clerkId}`, {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`

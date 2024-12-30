@@ -7,7 +7,7 @@ const Register = () => {
         <img src="/assets/logo.png" alt="Mentoons Logo" className="w-[30%]" />
       </div>
 
-      <SignUp signInUrl="/sign-in" redirectUrl={"/dashboard"} />
+      <SignUp signInUrl="/sign-in" />
 
     </div>
   );

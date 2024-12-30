@@ -36,7 +36,7 @@ const ProductTable = () => {
     if (productToDelete) {
       try {
         const response = await fetch(
-          `https://mentoons-backend-zlx3.onrender.com/api/v1/products/${productToDelete._id}`,
+          `${import.meta.env.VITE_BASE_URL}/products/${productToDelete._id}`,
           {
             method: "DELETE",
           }
@@ -104,7 +104,7 @@ const ProductTable = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `https://api.mentoons.com/api/v1/products?limit=${limit}&page=${currentPage}&sort=${sortOrder}&search=${debouncedSearchTerm}`
+          `${import.meta.env.VITE_BASE_URL}/products?limit=${limit}&page=${currentPage}&sort=${sortOrder}&search=${debouncedSearchTerm}`
         );
         const result = await response.json();
         console.log(result, "osoo");

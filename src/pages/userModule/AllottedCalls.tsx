@@ -35,7 +35,7 @@ const AllottedCalls = () => {
 
     const fetchAllottedCalls = async () => {
         try {
-            const response = await axios.get(`https://mentoons-backend-zlx3.onrender.com/api/v1/user/allocatedCalls`,
+            const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/user/allocatedCalls`,
                 {
                     headers: {
                         Authorization: `Bearer ${await getToken()}`

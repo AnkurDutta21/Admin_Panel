@@ -5,7 +5,7 @@ import { DashboardDataResponse } from "../../types";
 
 export const dashboardApiSlice = createApi({
    reducerPath: 'dashboardApi',
-   baseQuery: fetchBaseQuery({ baseUrl: 'https://mentoons-backend-zlx3.onrender.com/api/v1/dashboard' }),
+   baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_BASE_URL}/dashboard` }),
    tagTypes: ['Dashboard'],
    endpoints: (builder) => ({
       getDashboardData: builder.query<DashboardDataResponse, void>({

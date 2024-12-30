@@ -5,7 +5,7 @@ import { JobApplicationResponse, JobData, JobDataResponse, singleJobDataResponse
 
 export const careerApiSlice = createApi({
    reducerPath: 'careerApi',
-   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/api/v1/career' }),
+   baseQuery: fetchBaseQuery({ baseUrl: `${import.meta.env.VITE_BASE_URL}/career` }),
    tagTypes: ['Jobs'],
    endpoints: (builder) => ({
       getJobs: builder.query<JobDataResponse, {sortOrder: string,searchTerm:string,page:number,limit:number}>({

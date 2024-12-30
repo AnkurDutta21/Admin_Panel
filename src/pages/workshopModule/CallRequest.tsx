@@ -149,7 +149,7 @@ const CallRequest = () => {
         return;
       }
 
-      const response = await axios.get("https://mentoons-backend-zlx3.onrender.com/api/v1/user/all-users", {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/user/all-users`, {
         headers: { Authorization: `Bearer ${token}` },
         params: {
           search: serchUser,
